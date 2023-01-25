@@ -1,0 +1,36 @@
+---
+- name: Update IP address for BigBlueButton
+  hosts: all
+  become: true
+  vars:
+    old_ip: "XXX.XXX.XXX.XXX"
+    new_ip: "XXX.XXX.XXX.XXX"
+    fqdn: "bbbX.example.com"
+  tasks:
+    - name: Set IP address for BigBlueButton
+      shell: bbb-conf --setip {{ fqdn }}
+    - name: Replace IP address in files
+      shell: sed -i 's/{{ old_ip }}/{{ new_ip }}/g' {{ item }}
+      with_items:
+        - /etc/bigbluebutton/bbb-web.properties
+        - /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
+        - /etc/nginx/sites-available/bigbluebutton
+        - /opt/freeswitch/etc/freeswitch/vars.xml
+        - /opt/freeswitch/etc/freeswitch/sip_profiles/external.xml
+        - /usr/local/bigbluebutton/core/scripts/bigbluebutton.yml
+        - /etc/bigbluebutton/nginx/sip.nginx
+        - /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml
+        - /etc/bigbluebutton/bbb-webrtc-sfu/production.yml
+        - /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml
+        - /etc/bigbluebutton/bbb-html5.yml
+        - /usr/share/bbb-web/WEB-INF/classes/spring/turn-stun-servers.xml
+    - name: Restart BigBlueButton
+      shell: bbb-conf --restart
+    - name: Change directory to bbb-monitoring
+      command: cd /root/bbb-monitoring
+    - name: Replace IP address in docker-compose.yaml
+      shell: sed -i 's/{{ old_ip }}/{{ new_ip }}/g' /root/bbb-monitoring/docker-compose.yaml
+    - name: Start bbb-monitoring with force-recreate
+      shell: docker-compose up -d --force-recreate
+    - name: Generate new secret for BigBlueButton
+      shell: bbb-conf --secret
