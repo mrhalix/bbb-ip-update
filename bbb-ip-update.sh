@@ -27,7 +27,7 @@ for file in "${config_files[@]}"; do
 done
 
 # Set IP address
-if [ $dry_run -eq 0 ]; then
+if [[ $dry_run -eq 0 ]]; then
     bbb-conf --setip $fqdn
 else
     echo "Dry run: IP address would be set to $fqdn"
@@ -37,7 +37,7 @@ fi
 if [ -d "/root/bbb-monitoring" ]; then
     cd /root/bbb-monitoring
     if [ -f "docker-compose.yaml" ]; then
-        if [ $dry_run -eq 0 ]; then
+        if [[ $dry_run -eq 0 ]]; then
             sed -i "s/$old_ip/$new_ip/g" docker-compose.yaml
             docker-compose up -d --force-recreate
         else
@@ -51,7 +51,7 @@ else
 fi
 
 # Restart BigBlueButton
-if [ $dry_run -eq 0 ]; then
+if [[ $dry_run -eq 0 ]]; then
     bbb-conf --restart
 else
     echo "Dry run: BigBlueButton would be restarted"
