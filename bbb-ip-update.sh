@@ -9,7 +9,7 @@ fqdn="bbbX.example.com"
 dry_run=false
 
 # Array of configuration files
-config_files=(/etc/bigbluebutton/bbb-web.properties /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties /etc/nginx/sites-available/bigbluebutton /opt/freeswitch/etc/freeswitch/vars.xml /opt/freeswitch/etc/freeswitch/sip_profiles/external.xml /usr/local/bigbluebutton/core/scripts/bigbluebutton.yml /etc/bigbluebutton/nginx/sip.nginx /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml /etc/bigbluebutton/bbb-webrtc-sfu/production.yml /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml /etc/bigbluebutton/bbb-html5.yml /usr/share/bbb-web/WEB-INF/classes/spring/turn-stun-servers.xml)
+config_files=(/usr/share/bigbluebutton/nginx/sip.nginx /etc/bigbluebutton/bbb-web.properties /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties /etc/nginx/sites-available/bigbluebutton /opt/freeswitch/etc/freeswitch/vars.xml /opt/freeswitch/etc/freeswitch/sip_profiles/external.xml /usr/local/bigbluebutton/core/scripts/bigbluebutton.yml /etc/bigbluebutton/nginx/sip.nginx /usr/local/bigbluebutton/bbb-webrtc-sfu/config/default.yml /etc/bigbluebutton/bbb-webrtc-sfu/production.yml /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml /etc/bigbluebutton/bbb-html5.yml /usr/share/bbb-web/WEB-INF/classes/spring/turn-stun-servers.xml)
 
 # Loop through the config files and update IP addresses
 for file in "${config_files[@]}"; do
