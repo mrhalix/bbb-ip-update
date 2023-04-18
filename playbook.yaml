@@ -24,6 +24,7 @@
         - /usr/share/meteor/bundle/programs/server/assets/app/config/settings.yml
         - /etc/bigbluebutton/bbb-html5.yml
         - /usr/share/bbb-web/WEB-INF/classes/spring/turn-stun-servers.xml
+        - /usr/share/bigbluebutton/nginx/sip.nginx
     - name: Restart BigBlueButton
       shell: bbb-conf --restart
     - name: Change directory to bbb-monitoring
