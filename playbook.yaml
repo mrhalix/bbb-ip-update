@@ -12,6 +12,7 @@
     - name: Replace IP address in files
       shell: sed -i 's/{{ old_ip }}/{{ new_ip }}/g' {{ item }}
       with_items:
+        - /etc/turnserver.conf
         - /etc/bigbluebutton/bbb-web.properties
         - /usr/share/bbb-web/WEB-INF/classes/bigbluebutton.properties
         - /etc/nginx/sites-available/bigbluebutton
